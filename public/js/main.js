@@ -27,6 +27,15 @@ socket.on("message", (message) => {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+// Get generated message
+socket.on("response", (response) => {
+  console.log(response);
+  OutputResponse(response);
+
+  // Scroll down to the bottom
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
 // Message submit
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -49,6 +58,14 @@ function OutputMessage(message) {
   div.classList.add("message");
   div.innerHTML = ` <p class="meta">${message.username} <span>${message.time}</span></p>
   <p class="text">${message.text}</p>`;
+  document.querySelector(".chat-messages").appendChild(div);
+}
+
+function OutputResponse(response) {
+  const div = document.createElement("div");
+  div.classList.add("message");
+  div.innerHTML = ` <p class="meta">ChatCord Assistant</p>
+  <p class="text">${response}</p>`;
   document.querySelector(".chat-messages").appendChild(div);
 }
 
