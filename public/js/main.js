@@ -36,6 +36,14 @@ socket.on("response", (response) => {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+socket.on("translation", (trans) => {
+  console.log(trans);
+  OutputResponse(trans);
+
+  // Scroll down to the bottom
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
 // Message submit
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
