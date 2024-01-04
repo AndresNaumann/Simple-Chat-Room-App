@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+      crossorigin="anonymous"
+    />
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+        background-color: #f2f2f2; /* Set a light background color */
+      }
+
+      .join-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .join-main {
+        background-color: #ffffff; /* Set a white background color */
+        border-radius: 10px; /* Add rounded edges */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+        overflow: hidden;
+        width: 300px; /* Adjust the width as needed */
+      }
+
+      form {
+        padding: 20px;
+      }
+
+      .form-control {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50; /* Set a green color for the button */
+        color: #ffffff; /* Set white text color */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049; /* Darken the color on hover */
+      }
+    </style>
+    <title>4N Language</title>
+  </head>
+  <body>
+    <div class="join-container">
+      <main class="join-main">
+        <form action="/chat">
+          <div class="form-control">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Enter username..."
+              required
+            />
+          </div>
+          <div class="form-control">
+            <label for="room">Language</label>
+            <select name="room" id="room">
+              <option value="Spanish">Spanish</option>
+              <option value="French">French</option>
+              <option value="Portuguese">Portuguese</option>
+              <option value="German">German</option>
+              <option value="Finnish">Finnish</option>
+              <option value="Russian">Russian</option>
+            </select>
+          </div>
+          <button type="submit" class="btn">Begin Chat</button>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>

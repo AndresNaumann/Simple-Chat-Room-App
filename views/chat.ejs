@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 70vh;
+        padding-top: 56px;
+      }
+
+      .navbar {
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand,
+      .navbar-nav a {
+        color: #333;
+      }
+
+      .navbar-toggler-icon {
+        color: #333;
+      }
+
+      .navbar-toggler {
+        border-color: #333;
+      }
+
+      /* .chat-container {
+        max-width: 1100px;
+        background: #fff;
+        margin: 30px auto;
+        overflow: hidden;
+      }
+
+      .chat-messages {
+        padding: 30px;
+        max-height: 500px;
+        overflow-y: scroll;
+      }
+
+      .chat-messages .message {
+        padding: 10px;
+        margin-bottom: 15px;
+        background-color: var(--light-color);
+        border-radius: 5px;
+        overflow-wrap: break-word;
+      }
+
+      .chat-messages .message .meta {
+        font-size: 15px;
+        font-weight: bold;
+        color: var(--dark-color-b);
+        opacity: 0.7;
+        margin-bottom: 7px;
+      }
+
+      .chat-messages .message .meta span {
+        color: #777;
+      }
+
+      .chat-form-container {
+        padding: 20px 30px;
+        background-color: var(--dark-color-a);
+      } */
+    </style>
+
+    <title>LangLearn</title>
+  </head>
+  <body>
+    <!-- Navigation Bar Start ------------------------------------------------------------------------------------->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <a class="navbar-brand" href="/">LangLearn</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <% if (user) { %>
+          <li class="nav-item active">
+            <a class="nav-link" href="/pastconversations">Chat History</a>
+          </li>
+          <% } %>
+        </ul>
+        <ul class="navbar-nav">
+          <% if (user) { %>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Welcome, <%= user.name %>
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right"
+              aria-labelledby="navbarDropdown"
+            >
+              <a class="dropdown-item" href="/edit/<%= user.id%>/"
+                >Edit Account</a
+              >
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/logout">logout</a>
+            </div>
+          </li>
+          <% } else { %>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Log in
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right"
+              aria-labelledby="navbarDropdown"
+            >
+              <a class="dropdown-item" href="/login">Log in</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Help</a>
+            </div>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
+
+    <!--End Navigation Bar-->
+
+    <!--Places where text shows up------------------------------------------------------------------------------------->
+
+    <!-- Fixed Header -->
+    <!-- <div class="fixed-header">
+      <h1>My Application</h1>
+    </div> -->
+
+    <!-- Main Content -->
+
+    <div class="chat-container">
+      <header class="chat-header">
+        <h1><i class="fas fa-comments"></i> LangLearn</h1>
+        <a id="leave-btn" class="btn">Leave Room</a>
+      </header>
+      <main class="chat-main">
+        <div class="chat-sidebar">
+          <h2 id="room-name"></h2>
+        </div>
+        <div class="chat-messages">
+          <!-- <div class="message">
+            <p class="meta">Brad <span>9:12pm</span></p>
+            <p class="text">Sample Message from Brad</p>
+          </div> -->
+        </div>
+        <div class="chat-terms">
+          <h4>New Terms</h4>
+        </div>
+      </main>
+      <div class="chat-form-container">
+        <form id="chat-form">
+          <input
+            id="msg"
+            type="text"
+            placeholder="Enter Message"
+            required
+            autocomplete="off"
+          />
+          <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- End-->
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.2/qs.min.js"
+      integrity="sha512-vCegEXqPUYpZsTGz2lk0jaQ1psxtFeniVJACAXhMVxuoYa/N4nZkjoVFOxLwP7uGeQOoemiz7DQrIpRTj4IBPw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      document.getElementById("chat-form").focus();
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
